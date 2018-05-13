@@ -55,6 +55,31 @@ def merge(arr1,arr2):
     ans += arr1[i:] if i<len(arr1) else arr2[j:]
     return ans
 
+# Quicksort
+def quicksort(arr):
+    ans = arr[:]
+    quicksort_util(ans,0,len(ans)-1)
+    return ans
+
+def quicksort_util(arr,low,high):
+    if low>=high:
+        return
+    p = partition(arr,low,high)
+    quicksort_util(arr,low,p-1)
+    quicksort_util(arr,p+1,high)
+
+def partition(arr,low,high):
+    mid = int((low+high)/2)
+    pivot = arr[mid]
+    left,right = low,high
+    while left<right:
+        while left<=high and arr[left]<pivot:
+            left += 1
+        while right>=low and arr[right]>pivot:
+            right -= 1
+        if left<right:
+            arr[left],arr[right] = arr[right],arr[left]
+    return right
 
 
 # Testcase
@@ -65,5 +90,7 @@ print(binSearch(arr,10))
 arr = [1,5,3,2,4,11,8,6,9]
 arr2 = bubbleSort(arr)
 arr3 = mergeSort(arr)
+arr4 = quicksort(arr)
 print(arr2)
 print(arr3)
+print(arr4)
